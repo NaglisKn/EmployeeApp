@@ -17,8 +17,13 @@ namespace EmployeeApp.Controllers
         private EmployeeContext db = new EmployeeContext();
 
         // GET: Employee
-        public ViewResult Index(string currentFilter, string searchString, int? page)
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.LastNameSortParm = String.IsNullOrEmpty(sortOrder) ? "Lastname_desc" : "";
+            ViewBag.SalarySortParm = sortOrder == "Salary" ? "salary_desc" : "Salary";
+
             if (searchString != null)
             {
                 page = 1;
@@ -27,13 +32,33 @@ namespace EmployeeApp.Controllers
             {
                 searchString = currentFilter;
             }
+
             ViewBag.CurrentFilter = searchString;
+
             var employees = from e in db.Employees
                            select e;
             if (!String.IsNullOrEmpty(searchString))
             {
-                employees = employees.Where(e => e.LastName.Contains(searchString)
-                                       || e.FirstName.Contains(searchString));
+                employees = employees.Where(e => e.FirstName.Contains(searchString)
+                                       || e.LastName.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    employees = employees.OrderByDescending(e => e.FirstName);
+                    break;
+                case "Lastname_desc":
+                    employees = employees.OrderByDescending(e => e.LastName);
+                    break;
+                case "Salary":
+                    employees = employees.OrderBy(e => e.SalaryNet);
+                    break;
+                case "salary_desc":
+                    employees = employees.OrderByDescending(s => s.SalaryNet);
+                    break;
+                default:
+                    employees = employees.OrderBy(e => e.FirstName);
+                    break;
             }
             int pageSize = 5;
             int pageNumber = (page ?? 1);

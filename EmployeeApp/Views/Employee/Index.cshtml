@@ -1,5 +1,4 @@
-﻿@model IEnumerable<EmployeeApp.Models.Employee>
-@model PagedList.IPagedList<EmployeeApp.Models.Employee>
+﻿@model PagedList.IPagedList<EmployeeApp.Models.Employee>
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
@@ -12,30 +11,29 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-@using (Html.BeginForm("Index", "Employees", FormMethod.Get))
+@using (Html.BeginForm("Index", "Employee", FormMethod.Get))
 {
     <p>
-        Filter: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        Filter by first or last name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Search" />
     </p>
 }
     <table class="table" id="tableID">
         <tr>
-                @Html.DisplayNameFor(model => model.FirstName)
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
+                @Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.NameSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastName)
+                @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.LastNameSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SalaryNet)
+                @Html.ActionLink("Salary net", "Index", new { sortOrder = ViewBag.SalarySortParm })
             </th>
             <th>
                 @Html.Label("SalaryGross")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Image)
+                @Html.Label("Image")
             </th>
             <th></th>
         </tr>
@@ -86,3 +84,8 @@
         }
 
     </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
