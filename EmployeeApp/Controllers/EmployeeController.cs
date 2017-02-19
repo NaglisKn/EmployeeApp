@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using EmployeeApp.DAL;
 using EmployeeApp.Models;
+using PagedList;
 
 namespace EmployeeApp.Controllers
 {
@@ -16,9 +17,27 @@ namespace EmployeeApp.Controllers
         private EmployeeContext db = new EmployeeContext();
 
         // GET: Employee
-        public ActionResult Index()
+        public ViewResult Index(string currentFilter, string searchString, int? page)
         {
-            return View(db.Employees.ToList());
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+            var employees = from e in db.Employees
+                           select e;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                employees = employees.Where(e => e.LastName.Contains(searchString)
+                                       || e.FirstName.Contains(searchString));
+            }
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(employees.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Employee/Details/5

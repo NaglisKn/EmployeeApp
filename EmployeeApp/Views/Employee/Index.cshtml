@@ -1,17 +1,27 @@
 ﻿@model IEnumerable<EmployeeApp.Models.Employee>
+@model PagedList.IPagedList<EmployeeApp.Models.Employee>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Employees";
 }
 
-<h2>Index</h2>
+<h2>Employees</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<body>
+@using (Html.BeginForm("Index", "Employees", FormMethod.Get))
+{
+    <p>
+        Filter: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
     <table class="table" id="tableID">
         <tr>
+                @Html.DisplayNameFor(model => model.FirstName)
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
@@ -76,8 +86,3 @@
         }
 
     </table>
-</body>
-@{
-       // var table = getElementById("tableID");
-     //   var row = table.insertCell(2);
-}
