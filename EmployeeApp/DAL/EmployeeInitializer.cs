@@ -13,14 +13,14 @@ namespace EmployeeApp.DAL
         {
             var employees = new List<Employee>
             {
-            new Employee{FirstName="Carson",LastName="Alexander",SallaryNet=500},
-            new Employee{FirstName="Meredith",LastName="Alonso",SallaryNet=600},
-            new Employee{FirstName="Arturo",LastName="Anand",SallaryNet=700},
-            new Employee{FirstName="Gytis",LastName="Barzdukas",SallaryNet=800},
-            new Employee{FirstName="Yan",LastName="Li",SallaryNet=550},
-            new Employee{FirstName="Peggy",LastName="Justice",SallaryNet=600},
-            new Employee{FirstName="Laura",LastName="Norman",SallaryNet=650},
-            new Employee{FirstName="Nino",LastName="Olivetto",SallaryNet=686}
+            new Employee{FirstName="Carson",LastName="Alexander",SalaryNet=500},
+            new Employee{FirstName="Meredith",LastName="Alonso",SalaryNet=600},
+            new Employee{FirstName="Arturo",LastName="Anand",SalaryNet=700},
+            new Employee{FirstName="Gytis",LastName="Barzdukas",SalaryNet=800},
+            new Employee{FirstName="Yan",LastName="Li",SalaryNet=550},
+            new Employee{FirstName="Peggy",LastName="Justice",SalaryNet=600},
+            new Employee{FirstName="Laura",LastName="Norman",SalaryNet=650},
+            new Employee{FirstName="Nino",LastName="Olivetto",SalaryNet=686}
             };
 
             employees.ForEach(s => context.Employees.Add(s));

@@ -14,7 +14,7 @@ namespace EmployeeApp.Models
         [Required]
         public string LastName { get; set; }
         [Required]
-        public int SallaryNet { get; set; }
+        public int SalaryNet { get; set; }
         public byte[] Image { get; set; }
     }
 }
