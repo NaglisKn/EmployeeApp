@@ -1,5 +1,5 @@
 ﻿@model EmployeeApp.Models.Employee
-
+@using EmployeeApp.Helpers;
 @{
     ViewBag.Title = "Edit";
 }
@@ -7,7 +7,7 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Employee", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -48,12 +48,21 @@
                 @Html.ValidationMessageFor(model => model.SalaryNet, "", new { @class = "text-danger" })
             </div>
         </div>
-      
-
+        
+        
         <div class="form-group">
             @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="file" id="image1" name="image1" />
+            <div class="col-md-10">    
+               @{
+                   //Converts Model.Image to base64 string for display
+                   var helper = new ImageHelper();
+                   var imgSrc = helper.GetImage(Model.Image);
+               }
+                <img style='display:block; width:200px;height:auto;' src="@imgSrc" />
+                @{/*
+                  * This isn't safe, server side validation must be implemented
+                  */}
+                <input type="file" id="image1" name="image1" accept="image/*" />
             </div>
         </div>
 

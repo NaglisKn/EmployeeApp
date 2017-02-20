@@ -136,13 +136,18 @@ namespace EmployeeApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPost(int? id)
+        public ActionResult EditPost(int? id, HttpPostedFileBase image1)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var employeeToUpdate = db.Employees.Find(id);
+            if (image1 != null)
+            {
+                employeeToUpdate.Image = new byte[image1.ContentLength];
+                image1.InputStream.Read(employeeToUpdate.Image, 0, image1.ContentLength);
+            }
             if (TryUpdateModel(employeeToUpdate, "",
                new string[] { "FirstName", "LastName", "SalaryNet", "Image" }))
             {

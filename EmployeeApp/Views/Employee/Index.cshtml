@@ -62,21 +62,6 @@
             taxes = gross * Hinsurance + gross * Sinsurance + grossPay * pvm;
             net = gross - taxes;
 
-            //Get Image from Varbinary
-            //Bitmap image = null;
-            byte[] data = item.Image;
-            if (data != null)
-            {
-                using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
-                {
-                    ms.Write(data, 0, data.Length);
-                    ms.Position = 0L;
-
-                    //image = new Bitmap(ms);
-                    //image
-                }
-            }
-
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.FirstName)
@@ -96,7 +81,7 @@
                     var imgSrc = helper.GetImage(item.Image);
                 }           
                 <td>
-                    <img style='display:block; width:auto;height:100px;' src="@imgSrc" />
+                    <img style='display:block; width:200px;height:auto;' src="@imgSrc" />
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |

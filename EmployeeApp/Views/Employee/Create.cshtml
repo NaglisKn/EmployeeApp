@@ -10,7 +10,7 @@
 @using (Html.BeginForm("Create", "Employee", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Employee</h4>
         <hr />
@@ -42,7 +42,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="file" id="image1" name="image1" />
+                @{/*
+                  * This isn't safe, server side validation must be implemented
+                  */}
+                <input type="file" id="image1" name="image1" accept="image/*" />
             </div>
         </div>
 
@@ -52,7 +55,7 @@
             </div>
         </div>
     </div>
-}
+                    }
 
 <div>
     @Html.ActionLink("Back to List", "Index")

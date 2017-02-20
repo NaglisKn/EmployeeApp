@@ -1,5 +1,5 @@
 ﻿@model EmployeeApp.Models.Employee
-
+@using EmployeeApp.Helpers;
 @{
     ViewBag.Title = "Details";
 }
@@ -39,7 +39,12 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Image)
+            @{
+                //Converts Model.Image to base64 string for display
+                var helper = new ImageHelper();
+                var imgSrc = helper.GetImage(Model.Image);
+            }
+            <img style='display:block; width:150px;height:auto;' src="@imgSrc" />
         </dd>
 
     </dl>
