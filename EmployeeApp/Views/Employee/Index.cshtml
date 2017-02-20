@@ -1,5 +1,7 @@
 ﻿@model PagedList.IPagedList<EmployeeApp.Models.Employee>
 @using PagedList.Mvc;
+@using System.Drawing;
+@using EmployeeApp.Helpers;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
@@ -59,6 +61,22 @@
 
             taxes = gross * Hinsurance + gross * Sinsurance + grossPay * pvm;
             net = gross - taxes;
+
+            //Get Image from Varbinary
+            //Bitmap image = null;
+            byte[] data = item.Image;
+            if (data != null)
+            {
+                using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+                {
+                    ms.Write(data, 0, data.Length);
+                    ms.Position = 0L;
+
+                    //image = new Bitmap(ms);
+                    //image
+                }
+            }
+
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.FirstName)
@@ -72,8 +90,13 @@
                 <td>
                     <p>@net</p>
                 </td>
+                @{
+                    //Converts item.Image to base64 string
+                    var helper = new ImageHelper();
+                    var imgSrc = helper.GetImage(item.Image);
+                }           
                 <td>
-                    @Html.DisplayFor(modelItem => item.Image)
+                    <img style='display:block; width:auto;height:100px;' src="@imgSrc" />
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
@@ -81,7 +104,7 @@
                     @Html.ActionLink("Delete", "Delete", new { id = item.ID })
                 </td>
             </tr>
-        }
+                    }
 
     </table>
 <br />

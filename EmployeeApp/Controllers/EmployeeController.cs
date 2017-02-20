@@ -83,6 +83,7 @@ namespace EmployeeApp.Controllers
         // GET: Employee/Create
         public ActionResult Create()
         {
+
             return View();
         }
 
@@ -91,10 +92,15 @@ namespace EmployeeApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FirstName,LastName,SalaryNet,Image")] Employee employee)
+        public ActionResult Create([Bind(Include = "FirstName,LastName,SalaryNet,Image")] Employee employee, HttpPostedFileBase image1)
         {
             try
             {
+                if (image1!=null)
+                {
+                    employee.Image = new byte[image1.ContentLength];
+                    image1.InputStream.Read(employee.Image, 0, image1.ContentLength);
+                }
                if (ModelState.IsValid)
                {
                    db.Employees.Add(employee);
