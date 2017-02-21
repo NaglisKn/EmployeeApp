@@ -53,12 +53,13 @@
                 </td>
                 @{
                     //
-                    var SalaryHelper = new SalaryHelper();
-                    var SalaryGross = SalaryHelper.GetGrossSalary(item.SalaryNet);
+                    var SalHelper = new SalaryHelper();
+                    var SalaryGross = SalHelper.GetGrossSalary(item.SalaryNet);
                 }
                 
                 <td>
-                    <p>@SalaryGross</p>
+                    @{/*Converting double to string and formating*/}
+                    <p>@SalaryGross.ToString("F")</p>
                 </td>
                 @{
                     //Converts item.Image to base64 string

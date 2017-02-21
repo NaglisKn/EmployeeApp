@@ -7,23 +7,29 @@ namespace EmployeeApp.Helpers
 {
     public class SalaryHelper
     {
-        double npd = 310;
-        double IncomeTax = 0.15;
-        double HealthInsurance = 0.06;
-        double SocInsurance = 0.03;
+        // All constans according to latest data
+        const double npd = 310;
+        const double IncomeTax = 0.15;
+        const double HealthInsurance = 0.06;
+        const double SocInsurance = 0.03;
 
         double SalaryGross = new double();
+        //Calculates Gross salary from input Net salary
         public double GetGrossSalary(double salaryNet)
         {
-            if (salaryNet>1000)
+            if (salaryNet>759)
             {
                 SalaryGross = salaryNet / (1-(IncomeTax + HealthInsurance + SocInsurance));
                 return SalaryGross;
             }
-            else if (salaryNet <= 335.3)
+            else if (salaryNet < 336)
             {
                 SalaryGross = (salaryNet - 46.5) / 0.76;
                 return SalaryGross;
+            }
+            else
+            {
+
             }
             return SalaryGross;
         }
