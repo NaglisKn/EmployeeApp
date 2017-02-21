@@ -29,7 +29,9 @@ namespace EmployeeApp.Helpers
             }
             else
             {
-
+                //System doesn't support calculating NPD from given NET sallary. Needs to be updated.
+                SalaryGross = salaryNet / (1 - (IncomeTax + HealthInsurance + SocInsurance));
+                return SalaryGross;
             }
             return SalaryGross;
         }

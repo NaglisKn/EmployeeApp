@@ -15,7 +15,7 @@ namespace EmployeeApp.Models
         public string LastName { get; set; }
         [Required]
         [Range(0, 50000, ErrorMessage = "Check salary you entered and try again.")]
-        [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = false)]
         public int SalaryNet { get; set; }
         public byte[] Image { get; set; }
     }

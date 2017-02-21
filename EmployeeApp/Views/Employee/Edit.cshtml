@@ -44,20 +44,23 @@
         <div class="form-group">
             @Html.Label("SalaryGross", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.SalaryNet, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled"} })
-                @Html.ValidationMessageFor(model => model.SalaryNet, "", new { @class = "text-danger" })
+                @{
+                    var SalHelper = new SalaryHelper();
+                    var SalaryGross = SalHelper.GetGrossSalary(Model.SalaryNet);
+                }
+                @Html.Label(SalaryGross.ToString("F"));
             </div>
         </div>
-        
-        
+
+
         <div class="form-group">
             @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">    
-               @{
-                   //Converts Model.Image to base64 string for display
-                   var helper = new ImageHelper();
-                   var imgSrc = helper.GetImage(Model.Image);
-               }
+            <div class="col-md-10">
+                @{
+                    //Converts Model.Image to base64 string for display
+                    var helper = new ImageHelper();
+                    var imgSrc = helper.GetImage(Model.Image);
+                }
                 <img style='display:block; width:200px;height:auto;' src="@imgSrc" />
                 @{/*
                   * This isn't safe, server side validation must be implemented
@@ -72,7 +75,7 @@
             </div>
         </div>
     </div>
-}
+                    }
 
 <div>
     @Html.ActionLink("Back to List", "Index")
