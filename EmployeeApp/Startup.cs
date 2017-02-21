@@ -1,5 +1,7 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using EmployeeApp.DAL;
+
 
 [assembly: OwinStartupAttribute(typeof(EmployeeApp.Startup))]
 namespace EmployeeApp

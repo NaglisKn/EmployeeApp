@@ -41,27 +41,6 @@
         </tr>
         @foreach (var item in Model)
         {
-            double npd = 310;
-            double pvm = 0.15;
-            double Hinsurance = 0.06;
-            double Sinsurance = 0.03;
-            double gross = item.SalaryNet;
-
-            double npdReal = 310;
-            double grossPay = new double();
-            double net = new double();
-            double taxes = new double();
-
-            if (gross > 380)
-            {
-                npdReal = npd - (gross - 380) * 0.5;
-                if (npdReal < 0) { npdReal = 0; }
-            }
-            grossPay = gross - npdReal;
-
-            taxes = gross * Hinsurance + gross * Sinsurance + grossPay * pvm;
-            net = gross - taxes;
-
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.FirstName)
@@ -72,8 +51,14 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.SalaryNet)
                 </td>
+                @{
+                    //
+                    var SalaryHelper = new SalaryHelper();
+                    var SalaryGross = SalaryHelper.GetGrossSalary(item.SalaryNet);
+                }
+                
                 <td>
-                    <p>@net</p>
+                    <p>@SalaryGross</p>
                 </td>
                 @{
                     //Converts item.Image to base64 string
