@@ -7,6 +7,7 @@ using System.Drawing;
 
 namespace EmployeeApp.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
         public ActionResult Index()

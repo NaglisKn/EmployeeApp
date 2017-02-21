@@ -50,13 +50,14 @@ namespace EmployeeApp
             //    clientId: "",
             //    clientSecret: "");
 
-            //app.UseTwitterAuthentication(
-            //   consumerKey: "",
-            //   consumerSecret: "");
+            //Twitter login not working with localhost. Needs updating when app is deployed to server
+            app.UseTwitterAuthentication(
+               consumerKey: "XDHaBHpyFiF32VefhRiUISyPv",
+               consumerSecret: "1Exei34B7pqGIYyAgkTR3gSDRoFdamht3pCS7cK45oxs2cJUfg");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "178630585963986",
+               appSecret: "6a6d6520ff1a821a2bb3e26b8dc1e985");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
