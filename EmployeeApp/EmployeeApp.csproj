@@ -209,11 +209,16 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DAL\EmployeeContext.cs" />
     <Compile Include="DAL\EmployeeInitializer.cs" />
+    <Compile Include="DAL\WorkplaceConfiguration.cs" />
+    <Compile Include="DAL\WorkplaceInterceptorLogging.cs" />
+    <Compile Include="DAL\WorkplaceInterceptorTransientErrors.cs.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Helpers\SalaryHelper.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\Logger.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\IdentityModels.cs" />

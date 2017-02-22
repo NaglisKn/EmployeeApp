@@ -33,7 +33,6 @@ namespace EmployeeApp.Helpers
                 SalaryGross = salaryNet / (1 - (IncomeTax + HealthInsurance + SocInsurance));
                 return SalaryGross;
             }
-            return SalaryGross;
         }
     }
 }
